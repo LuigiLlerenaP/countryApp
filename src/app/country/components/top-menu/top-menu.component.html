@@ -1,0 +1,39 @@
+<header class="relative z-20 w-full border-b border-slate-700 bg-slate-900/90 shadow-md shadow-slate-800/10">
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <nav class="flex flex-wrap items-center justify-between gap-y-4 py-4 text-slate-100 font-medium">
+
+      <!-- Brand -->
+      <a routerLink="" class="flex items-center gap-3 text-lg font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m9.474 16l9.181 3.284a1.1 1.1 0 0 0 1.462-.887L21.99 4.239c.114-.862-.779-1.505-1.567-1.13L2.624 11.605c-.88.42-.814 1.69.106 2.017l2.44.868l1.33.467M13 17.26l-1.99 3.326c-.65.808-1.959.351-1.959-.683V17.24a2 2 0 0 1 .53-1.356l3.871-4.2" />
+        </svg>
+        <span>Country App</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="flex flex-row gap-6 lg:gap-10 items-center text-sm lg:text-base">
+
+        @for (navLink of navigationLinks(); track navLink.routerLink) {
+        <li>
+          <a [routerLink]="navLink.routerLink" routerLinkActive="text-emerald-400"
+            class="flex items-center gap-2 px-3 py-2 rounded-md text-slate-200 hover:text-emerald-400 hover:bg-slate-800 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path [attr.d]="navLink.icon" />
+            </svg>
+            {{ navLink.label }}
+          </a>
+        </li>
+        }
+        <li>
+          <button routerLink="contact"
+            class="flex items-center gap-2 h-9 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded transition shadow">
+            Contact us
+          </button>
+        </li>
+      </ul>
+
+    </nav>
+  </div>
+</header>
