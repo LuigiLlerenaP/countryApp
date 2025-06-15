@@ -1,3 +1,4 @@
-<country-search-input (searchValueEvent)="searchResult($event)" />
+<country-search-input titleSearch="Country" placeholderInput="Search by Country"
+  (searchValueEvent)="searchResult($event)" />
 
 <country-list [content]="values()" />

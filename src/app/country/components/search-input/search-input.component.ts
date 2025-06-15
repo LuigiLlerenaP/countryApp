@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'country-search-input',
@@ -10,4 +10,6 @@ export class SearchInputComponent {
   onSearch = (value: string): void => {
     this.searchValueEvent.emit(value);
   };
+  placeholderInput = input.required<string>();
+  titleSearch = input.required<string>();
 }

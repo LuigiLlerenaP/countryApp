@@ -4,6 +4,7 @@ import { CountryLayoutComponent } from './layouts/country-layout/country-layout.
 import { ByRegionPageComponent } from './pages/by-region-page/by-region-page.component';
 import { ByCountryComponent } from './pages/by-country-page/by-country-page.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { CountryPageComponent } from './pages/country-page/country-page.component';
 
 const countryRoutes: Routes = [
   {
@@ -25,6 +26,11 @@ const countryRoutes: Routes = [
       {
         path: 'contact',
         component: ContactComponent,
+      },
+      //Dinámicas
+      {
+        path: 'by/:code',
+        component: CountryPageComponent,
       },
       {
         path: '**',
