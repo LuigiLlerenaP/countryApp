@@ -1,2 +1,4 @@
 <app-title title="Por región" />
-<country-list [content]="values()" />
+<country-nav-region [regions]="regions" (query)="this.query.set($event)" />
+<country-list [countries]="countryResource.value()?? []" [errorMessage]="countryResource.error()"
+  [isEmpty]="countryResource.value()?.length === 0" />

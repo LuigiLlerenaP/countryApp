@@ -1,4 +1,6 @@
-<country-search-input titleSearch="Country" placeholderInput="Search by Country"
-  (searchValueEvent)="searchResult($event)" />
+<country-search-input titleSearch="Capital" placeholderInput="Search by Capital" (searchValueEvent)="query.set($event)"
+  [loading]="countryResource.isLoading()" [debounceTime]="700" [initialValue]="query()" />
 
-<country-list [content]="values()" />
+
+<country-list [countries]="countryResource.value()?? []" [isLoading]="countryResource.isLoading()"
+  [errorMessage]="countryResource.error()" [isEmpty]="countryResource.value()?.length === 0" />

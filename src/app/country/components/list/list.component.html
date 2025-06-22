@@ -1,39 +1,69 @@
-<section class="py-8 bg-slate-900">
-  <div class="w-full overflow-x-auto rounded-lg shadow-xl border border-emerald-600">
-    <table class="w-full text-left border-collapse">
-      <thead>
-        <tr class="bg-emerald-600">
-          @for (head of heads(); track head) {
-          <th class="h-12 px-4 text-sm font-semibold text-white text-center">{{head}}</th>
+<section class="py-10 bg-slate-900">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="overflow-x-auto rounded-2xl shadow-xl border border-emerald-600 bg-slate-950">
+      <table class="min-w-full table-auto border-collapse text-center">
+        <thead>
+          <tr class="bg-emerald-600 text-white">
+            @for (head of heads(); track head) {
+            <th class="h-14 px-4 text-sm font-semibold tracking-wide uppercase">
+              {{ head }}
+            </th>
+            }
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700">
+          @for (country of countries(); track country.cca2; let index = $index) {
+          <tr class="bg-slate-800 hover:bg-slate-700 transition-colors duration-200 text-slate-100">
+
+            <td class="h-14 px-4 text-sm font-medium">{{ index + 1 }}</td>
+
+            <td class="h-14 px-4">
+              <img [src]="country.flagSvg" [alt]="'SVG of ' + country.name"
+                class="inline-block w-6 h-4 rounded-sm shadow-sm" />
+            </td>
+
+            <td class="h-14 px-4">
+              <img [src]="country.flagPng" [alt]="'Flag of ' + country.name"
+                class="inline-block w-12 h-8 rounded shadow-md border border-slate-700" />
+            </td>
+
+            <td class="h-14 px-6 text-sm font-medium">{{ country.name }}</td>
+
+            <td class="h-14 px-6 text-sm">{{ country.capital }}</td>
+
+            <td class="h-14 px-6">
+              <span class="inline-block bg-emerald-500 text-white rounded-full px-3 py-1 text-xs font-semibold shadow">
+                {{ country.population | number }}
+              </span>
+            </td>
+
+            <td class="h-14 px-6">
+              <button [routerLink]="['/country/by/',country.cca2]"
+                class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-1.5 rounded-full shadow transition">
+                View
+              </button>
+            </td>
+          </tr>
           }
-        </tr>
-      </thead>
-      <tbody>
-        @for (cont of content(); track cont) {
-        <tr class="bg-slate-800 text-slate-100 hover:bg-slate-700 transition-colors cursor-pointer">
-          <td class="h-12 px-4 text-sm text-center">{{cont.Numero}}</td>
-          <td class="h-12 px-4 text-sm text-center">
-            <!-- Ejemplo icono SVG -->
-            <svg class="mx-auto w-5 h-5 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="cont.Icon" />
-            </svg>
-          </td>
-          <td class="h-12 px-4 text-sm text-center">
-            <!-- Ejemplo bandera con imagen -->
-            <img [src]="cont.Flag" [alt]="cont.Name" class="inline-block w-6 h-4 rounded-sm shadow-md" />
-          </td>
-          <td class="h-12 px-6 text-sm font-medium">{{cont.Name}}</td>
-          <td class="h-12 px-6 text-sm">{{cont.Capital}}</td>
-          <td class="h-12 px-6 text-sm text-right">{{cont.Population}}</td>
-          <td class="h-12 px-6 text-sm text-center">
-            <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded shadow transition">
-              View
-            </button>
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
+
+          @if (isLoading()) {
+          <tr>
+            <td colspan="8" class="h-14 text-center text-emerald-400 animate-pulse font-medium">
+              Buscando países...
+            </td>
+          </tr>
+          }
+
+          @if (countries().length == 0 && !isLoading() && errorMessage()) { <tr>
+            <td colspan="8" class="h-14 text-center text-slate-300 italic">
+              No se encontraron resultados
+              <span> {{ errorMessage() }}</span>
+            </td>
+          </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>

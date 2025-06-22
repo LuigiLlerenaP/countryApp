@@ -6,7 +6,7 @@
         <div class="flex items-center justify-center gap-4 mb-6">
           <div class="w-12 h-px bg-gradient-to-r from-transparent to-slate-600"></div>
           <h2 class="text-2xl font-semibold text-slate-100 tracking-wide whitespace-nowrap">
-            Search by <span class="text-emerald-400">Region</span>
+            Search by <span class="text-emerald-400">{{titleSearch()}}</span>
           </h2>
           <div class="w-12 h-px bg-gradient-to-l from-transparent to-slate-600"></div>
         </div>
@@ -15,8 +15,9 @@
       <div class="flex flex-col items-center w-full max-w-xl gap-4 md:flex-row">
         <!-- Campo de búsqueda -->
         <div class="relative w-full">
-          <input #txtSearch (keyup.enter)="onSearch(txtSearch.value)" id="id-s02" type="search" name="id-s02"
-            [placeholder]="placeholderInput()" aria-label="Search content"
+          <input #txtSearch (keyup.enter)="onSearch(txtSearch.value)" (keyup)="inputValue.set(txtSearch.value)"
+            [value]="inputValue()" id="id-s02" type="search" name="id-s02" [placeholder]="placeholderInput()"
+            aria-label="Search content"
             class="w-full h-12 px-4 pr-12 transition-all border-b outline-none focus-visible:outline-none peer border-slate-300 text-slate-600 placeholder:text-slate-400 autofill:bg-white focus:border-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-100" />
           <svg xmlns="http://www.w3.org/2000/svg"
             class="absolute w-5 h-5 top-3.5 right-4 stroke-slate-400 peer-disabled:cursor-not-allowed" fill="none"
@@ -31,6 +32,7 @@
         <button (click)="onSearch(txtSearch.value)"
           class="inline-flex items-center justify-center h-12 gap-2 px-6 text-sm font-medium tracking-wide text-white transition duration-300 rounded whitespace-nowrap bg-emerald-500 hover:bg-emerald-600 focus:bg-emerald-700 disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300">
           <span>Search</span>
+          @if (loading()) {
           <span class="relative only:-mx-6">
             <svg class="w-5 h-5 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
               viewBox="0 0 24 24" role="graphics-symbol" aria-labelledby="title-05 desc-05">
@@ -42,6 +44,7 @@
               </path>
             </svg>
           </span>
+          }
         </button>
       </div>
     </div>

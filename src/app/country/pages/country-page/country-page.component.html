@@ -1,1 +1,12 @@
-<p>country-page works!</p>,
+@if (countryResource.error()) {
+<app-not-found [countryCode]="countryCode" />
+}
+
+
+@if (countryResource.isLoading()) {
+<country-shearing />
+}
+
+@if (countryResource.hasValue()) {
+<country-information [countryInformation]="countryResource.value()" />
+}

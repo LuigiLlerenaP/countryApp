@@ -1,13 +1,15 @@
 import { Component, input, signal } from '@angular/core';
-import { Table } from '../../interfaces/table';
+import { Country } from '../../interfaces/country.interface';
+import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'country-list',
-  imports: [],
+  imports: [DecimalPipe, RouterLink],
   templateUrl: './list.component.html',
 })
 export class ListComponent {
-  content = input.required<Table[]>();
+  countries = input.required<Country[]>();
 
   heads = signal<string[]>([
     '#',
@@ -16,6 +18,10 @@ export class ListComponent {
     'Name',
     'Capital',
     'Population',
-    'Actions',
+    'More Info',
   ]);
+
+  errorMessage = input<string | unknown | null>();
+  isLoading = input<boolean>(false);
+  isEmpty = input<boolean>(false);
 }
